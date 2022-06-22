@@ -50,7 +50,6 @@ def get_time_line_post():
         ]
     }
 
-
 data = 0
 filename = os.path.join(app.static_folder, 'data.json')
 with open(filename) as f:
