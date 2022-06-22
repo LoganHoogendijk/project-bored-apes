@@ -51,9 +51,16 @@ def get_time_line_post():
     }
 
 @app.route('/api/timeline_post/<id>', methods=['GET'])
-def get_time_line_post_name(id):
+def get_time_line_post_id(id):
     p = TimelinePost.get(TimelinePost.id == id)
     return model_to_dict(p)
+
+@app.route('/api/timeline_post/<id>', methods=['DELETE'])
+def delete_time_line_post_id(id):
+    p = TimelinePost.get(TimelinePost.id == id)
+    p.delete_instance()
+    return "Deleted the post with ID=" + id + "\n"
+
 
 data = 0
 filename = os.path.join(app.static_folder, 'data.json')
