@@ -50,6 +50,11 @@ def get_time_line_post():
         ]
     }
 
+@app.route('/api/timeline_post/<id>', methods=['GET'])
+def get_time_line_post_name(id):
+    p = TimelinePost.get(TimelinePost.id == id)
+    return model_to_dict(p)
+
 data = 0
 filename = os.path.join(app.static_folder, 'data.json')
 with open(filename) as f:
