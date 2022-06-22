@@ -7,8 +7,7 @@ curl -X POST http://localhost:5000/api/timeline_post -d 'name=Test&email=test@gm
 echo "Printing requests"
 curl http://localhost:5000/api/timeline_post
 
-echo "Enter ID for post to be deleted: "
-read $id
+read -p "Enter ID for post to delete: " id
 curl -X DELETE http://localhost:5000/api/timeline_post/$id
 
 echo "Printing requests again"
