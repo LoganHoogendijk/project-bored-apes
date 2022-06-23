@@ -61,6 +61,9 @@ def delete_time_line_post_id(id):
     p.delete_instance()
     return "Deleted the post with ID=" + id + "\n"
 
+@app.route('/timeline')
+def timeline():
+        return render_template('timeline.html', title="Timeline")
 
 data = 0
 filename = os.path.join(app.static_folder, 'data.json')

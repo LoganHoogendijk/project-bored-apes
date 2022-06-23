@@ -1,0 +1,87 @@
+
+
+<form id="form">
+	<input name="name" type="text" placeholder="Name">
+	<input name="email" type="text" placeholder="Email">
+	<input name="content" type="text" placeholder="Content">
+	<button type="submit">Submit</button>
+</form>
+
+<body>
+	<div class="d-flex justify-content-center">
+		<div class="spinner-border"
+			role="status" id="loading">
+			<span class="sr-only">Loading...</span>
+		</div>
+	</div>
+	<h1>Timeline Posts</h1>
+	<table id="timelineposts"></table>
+</body>
+
+<script>
+
+async function getapi(url) {
+	const response = await fetch(url);
+
+	var dataa = await response.json();
+	console.log(dataa);
+	if (response) {
+		hideloader();
+	}
+	show(dataa);
+}
+const api_url = 'http://localhost:5000/api/timeline_post';
+
+(function () {
+const form = document.getElementById('form');
+
+form.addEventListener('submit', function(e) {
+	e.preventDefault()
+	const payload = new FormData(form);
+	console.log([...payload]);
+
+	fetch('/api/timeline_post', {
+	method: 'POST',
+	body: payload,
+	})
+	//.then(res => res.json())
+	.then(data => console.log(data))
+})
+//form.addEventListener('update', getapi(api_url));
+})()
+getapi(api_url);
+
+function hideloader() {
+	document.getElementById('loading').style.display = 'none';
+}
+
+function show(data) {
+	let tab =
+		`<tr>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Content</th>
+			<th>Created At</th>
+			<th>ID</th>
+		</tr>`;
+
+	for (const r of Object.values(data)) {
+		r.map(r => {
+			tab += `<tr>
+		<td>${r.name} </td>
+		<td>${r.email} </td>
+		<td>${r.content} </td>
+		<td>${r.created_at} </td>
+		<td>${r.id} </td>
+		</tr>`;
+		});
+	}
+
+	document.getElementById("timelineposts").innerHTML = tab;
+}
+</script>
+
+
+
+
+
