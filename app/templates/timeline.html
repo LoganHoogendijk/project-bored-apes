@@ -32,7 +32,6 @@ async function getapi(url) {
 }
 
 
-const api_url = 'http://localhost:5000/api/timeline_post';
 
 (function () {
 const form = document.getElementById('form');
@@ -47,7 +46,7 @@ form.addEventListener('submit', function(e) {
 	})
 	.then(res => res.json())
 	.then(data => console.log(data))
-	.then(getapi(api_url))
+	.then(getapi('/api/timeline_post'))
 
 })
 
