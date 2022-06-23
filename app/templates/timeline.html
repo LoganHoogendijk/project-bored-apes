@@ -30,11 +30,12 @@ async function getapi(url) {
 	}
 	show(dataa);
 }
+
+
 const api_url = 'http://localhost:5000/api/timeline_post';
 
 (function () {
 const form = document.getElementById('form');
-
 form.addEventListener('submit', function(e) {
 	e.preventDefault()
 	const payload = new FormData(form);
@@ -44,12 +45,13 @@ form.addEventListener('submit', function(e) {
 	method: 'POST',
 	body: payload,
 	})
-	//.then(res => res.json())
+	.then(res => res.json())
 	.then(data => console.log(data))
+	.then(getapi(api_url))
+
 })
-//form.addEventListener('update', getapi(api_url));
+
 })()
-getapi(api_url);
 
 function hideloader() {
 	document.getElementById('loading').style.display = 'none';
