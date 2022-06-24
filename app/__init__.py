@@ -31,6 +31,7 @@ class TimelinePost(Model):
 mydb.connect()
 mydb.create_tables([TimelinePost])
 
+#POST method
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
     name = request.form['name']
@@ -40,6 +41,7 @@ def post_time_line_post():
 
     return model_to_dict(timeline_post)
 
+#GET method
 @app.route('/api/timeline_post', methods=['GET'])
 def get_time_line_post():
     return {
@@ -49,12 +51,13 @@ def get_time_line_post():
                 TimelinePost.select().order_by(TimelinePost.created_at.desc())
         ]
     }
-
+#GET by id method
 @app.route('/api/timeline_post/<id>', methods=['GET'])
 def get_time_line_post_id(id):
     p = TimelinePost.get(TimelinePost.id == id)
     return model_to_dict(p)
 
+#DELETE post by id method
 @app.route('/api/timeline_post/<id>', methods=['DELETE'])
 def delete_time_line_post_id(id):
     p = TimelinePost.get(TimelinePost.id == id)
