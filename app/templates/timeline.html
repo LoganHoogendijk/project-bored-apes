@@ -45,12 +45,19 @@ form.addEventListener('submit', function(e) {
 	body: payload,
 	})
 	.then(res => res.json())
-	.then(data => console.log(data))
-	.then(getapi('/api/timeline_post'))
+	.then(data => {
+		console.log(data)
+		location.reload();
+		form.reset();
+	})
+	//.then(getapi('/api/timeline_post'))
+
 
 })
-
 })()
+
+
+getapi('/api/timeline_post')
 
 function hideloader() {
 	document.getElementById('loading').style.display = 'none';
