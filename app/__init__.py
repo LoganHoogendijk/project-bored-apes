@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from .gmail.gmail import send_email
 from peewee import *
 from playhouse.shortcuts import model_to_dict
-from datetime import datetime
+import datetime
 
 load_dotenv()
 app = Flask(__name__)
