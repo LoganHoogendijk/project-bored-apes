@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from .gmail.gmail import send_email
 from peewee import *
 from playhouse.shortcuts import model_to_dict
-import datetime
+from datetime import datetime
 
 load_dotenv()
 app = Flask(__name__)
@@ -40,25 +40,21 @@ mydb.create_tables([TimelinePost])
 def post_time_line_post():
     try:
         name = request.form['name']
-        if not name:
+        if (name == "" or name == None):
             return 'Invalid name', 400
-    except KeyError:
+    except:
         return 'Invalid name', 400
-    
     try:
         email = request.form['email']
-
-        if not email or '@' not in email:
+        if (not ("@" in email and "." in email) or email == "" or email == None):
             return 'Invalid email', 400
-    except KeyError:
+    except:
         return 'Invalid email', 400
-
     try:
         content = request.form['content']
-
-        if not content:
+        if (content == "" or content == None):
             return 'Invalid content', 400
-    except KeyError:
+    except:
         return 'Invalid content', 400
         
     timeline_post = TimelinePost.create(name=name, email=email, content=content)
