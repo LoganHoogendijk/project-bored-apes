@@ -1,25 +1,29 @@
 <!--Navbar start-->
-<nav class="navbar has-background-primary" role="navigation" aria-label="main navigation">
+<nav class="navbar is-transparent has-background-info pt-6" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand is-size-4 has-text-white">
+        <a class="navbar-item has-text-white"></a>
+    </div>
+    <div class="navbar-end pr-6">
         <div id="navbarBasicExample" class="navbar-menu">
-            <div class="navbar-start">
-              <a class="navbar-item">
+            <div class="navbar-start is-size-5">
+              <a class="navbar-item has-text-white" href="/">
                 About
               </a>
         
-              <a class="navbar-item">
+              <a class="navbar-item has-text-white" href="/timeline">
                 Projects
               </a>
         
               </div>
             </div>
         
-            <div class="navbar-end">
+            
               <div class="navbar-item">
                 <div class="buttons">
-                    <a class="button is-primary" href={{data[title]['social'][1]['val']}}>
+                    <a class="button is-info" href={{data[title]['social'][1]['val']}}>
                         <i class="fa fa-2x fa-github"></i>
                   </a>
-                  <a class="button is-primary" href={{data[title]['social'][0]['val']}}>
+                  <a class="button is-info" href={{data[title]['social'][0]['val']}}>
                     <i class="fa fa-2x fa-linkedin-square"></i>
                         
                   </a>

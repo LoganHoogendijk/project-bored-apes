@@ -169,6 +169,10 @@ def index():
     current_track_info = get_track()
     return render_template('pages/index.html', title="logan", url=os.getenv("URL"), data=data, anchors=anchors, trackinfo = current_track_info)
 
+@app.route("/hobbies")
+def hobbies():
+    return render_template('components/hobbies.html', title="logan", url=os.getenv("URL"), data=data)
+
 @app.route("/contact", methods=['POST'])
 def contact():
     if request.method == 'POST':
