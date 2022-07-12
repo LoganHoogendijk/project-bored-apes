@@ -14,11 +14,6 @@ class AppTestCase(unittest.TestCase):
         html = response.get_data(as_text=True)
         assert "<title>Logan Hoogendijk's Portfolio</title>" in html
         assert '<p class="title is-4"> Logan Hoogendijk </p>' in html
-        assert '<h1 class="title is-1 is-uppercase has-text-white ">Experience</h1>' in html
-        assert '<h1 class="title is-1 is-uppercase has-text-white">Education</h1>' in html
-        assert '<h1 class="title is-1 is-uppercase has-text-white">Projects</h1>' in html
-        assert '<h1 class="title is-1 has-text-white is-uppercase">Trivia Board</h1>' in html
-        assert '<h1 class="title is-1 is-uppercase has-text-white">Hobbies</h1>' in html
 
     def test_timeline_api(self):
         # empty get
