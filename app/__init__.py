@@ -93,11 +93,81 @@ filename = os.path.join(app.static_folder, 'data.json')
 with open(filename) as f:
     data = json.load(f)
 
-@app.route("/", defaults={"name": "logan"})
-@app.route("/<any(logan, hadi, justin):name>", methods=['GET'])
-def index(name):
+import requests
+CURRENT_TRACK_URL = 'https://api.lanyard.rest/v1/users/140901727413993472'
+
+def get_track():
+    response =requests.get(
+        CURRENT_TRACK_URL
+    )
+    json_resp = response.json()
+
+    if json_resp['data']['spotify'] is None:
+        return None
+    else:
+
+        name = json_resp['data']['spotify']['song']
+        artists = json_resp['data']['spotify']['artist']
+        id = json_resp['data']['spotify']['track_id']
+        album = json_resp['data']['spotify']['album']['large_text']
+        albumcover = json_resp['data']['spotify']['album_art_url']
+        listening = json_resp['data']['listening_to_spotify']
+
+        current_track_info = {
+            "name": name,
+            "artists": artists,
+            "album": album,
+            "albumcover": albumcover,
+            "id": id,
+            "listening": listening,
+            "url": "https://open.spotify.com/track/" + id
+        }
+
+        return current_track_info
+
+
+
+# SPOTIFY_GET_CURRENT_TRACK_URL = 'https://api.spotify.com/v1/me/player/currently-playing'
+# ACCESS_TOKEN = 'BQAszmEMcBzUgkl5Mumzf7L16OlEFAulXPL1bKO9Zji1hcRjmOQbJtc21ay0vm_YCBPx2BtDqmRv0Xt7K2uKy-anyb5n3pm2opEFIZdFB25v5Jip8OcBslUClPdR4Mcmo88f47ZnjYH2zbPnUrwZ9rqrtCTs5iMbhkPjDY4PPvb01loY8T0'
+
+
+# def get_current_track(access_token):
+#     response = requests.get(
+#         SPOTIFY_GET_CURRENT_TRACK_URL,
+#         headers={
+#             "Authorization": f"Bearer {access_token}"
+#         }
+#     )
+#     json_resp = response.json()
+
+#     track_id = json_resp['item']['id']
+#     track_name = json_resp['item']['name']
+#     track_album = json_resp['item']['album']['name']
+#     cover_art = json_resp['item']['album']['images'][1]['url']
+#     is_playing = json_resp['is_playing']
+#     artists = [artist for artist in json_resp['item']['artists']]
+
+#     link = json_resp['item']['album']['external_urls']['spotify']
+
+#     artist_names = ', '.join([artist['name'] for artist in artists])
+
+#     current_track_info = {
+#         "id": track_id,
+#         "track_name": track_name,
+#         "album": track_album,
+#         "cover": cover_art,
+#         "artists": artist_names,
+#         "link": link,
+#         "is_playing": is_playing
+#     }
+    
+#     return current_track_info
+
+@app.route("/")
+def index():
     anchors = ["Experience", "Education", "Projects", "Trivia", "Hobbies", "Map", "Contact"]
-    return render_template('pages/index.html', title=name, url=os.getenv("URL"), data=data, anchors=anchors)
+    current_track_info = get_track()
+    return render_template('pages/index.html', title="logan", url=os.getenv("URL"), data=data, anchors=anchors, trackinfo = current_track_info)
 
 @app.route("/contact", methods=['POST'])
 def contact():
@@ -119,3 +189,5 @@ def contact():
 def page_not_found(e):
     # Set the 404 status explicitly
     return render_template('pages/404.html'), 404
+
+

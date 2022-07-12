@@ -1,7 +1,8 @@
 {
     "logan":{
         "name":"Logan Hoogendijk",
-        "about":"Solution-oriented computer engineering student with experience in Java, Python, C/C++. Passionate about application development both in formal education projects and personal use. Adept at teamwork, problem solving, and communicating. I am always eager to learn more and improve my skills.",
+        "about":"Solution-oriented computer engineering student with experience in Java, Python, C/C++. Passionate about application development both in formal education projects and personal use.",
+        "education": "Queen's University '24 - BASc, studying Computer Engineering",
         "image":"https://media-exp1.licdn.com/dms/image/C4D03AQH8dG-yJOickw/profile-displayphoto-shrink_200_200/0/1643664093544?e=1659571200&v=beta&t=Sfa6xnpZ129ObXbxwCG-VYBw305sikll4wKkPlyTw3U",
         "experience":[
             {
