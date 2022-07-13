@@ -3,27 +3,52 @@
 
 {% block content %}
 
-<section id="hobbies" class="hero is-info is-small is-family-monospace has-text-white">
+<section id="hobbies1">
+    <div class="hero is-info is-small is-family-monospace has-text-white">
     <div class="column is-8 is-offset-2">
-        <div class="hero-body">
+        <div class="hero-body has-background-primary">
             <div class="title has-text-white">
                 Logan Hoogendijk
             </div>
-            <div class="block">
+            <div class="block ml-6">
                 Queen's University '24 - BASc studying Computer Engineering
             </div>
-            <div class="block">
+            <div class="block ml-6">
                 BLOCK 2
             </div>
         </div>
-        <div class="hero-body has-background-danger-dark">
-            <div class="card">
-
+        <div class="hero-body has-background-danger">
+            <div class="block ml-6">
+                <p>{{ data[title]['about'] }}</p>
+            </div>
+        </div>
+    </div> 
+    </div>
+    <div class="hero is-warning is-small">
+        <div class="column is-8 is-offset-2">
+            <div class="hero-body has-background-danger-light">
+                <div class="title has-text-white">
+                    Logan Hoogendijk
+                </div>
+                <div class="block ml-6">
+                    Queen's University '24 - BASc studying Computer Engineering
+                </div>
+                <div class="block ml-6">
+                    BLOCK 2
+                </div>
+            </div>
+            <div class="hero-body has-background-danger">
+                <div class="block ml-6">
+                    <p>{{ data[title]['about'] }}</p>
+                </div>
+            </div>
+            <div class="hero-body has-background-danger">
+                <div class="block ml-6">
+                    <p>{{ data[title]['about'] }}</p>
+                </div>
             </div>
         </div>
     </div>
-        
-    
 </section>
 <!-- Hobbies End -->
 {% endblock %}

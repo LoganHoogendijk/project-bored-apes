@@ -17,27 +17,29 @@
                     <div class="box about">
                         <p class="title is-5">About Me</p>
                         <p class="subtitle">{{ data[title]['about'] }}</p>
-                        <!--<p class="subtitle">{{ data[title]['education']}}</p>-->
-                        <div class="columns">
-                        <div class="column is-three-fifths is-offset-one-fifth has-background-light">
-                            <div class="card-content">
-                                <div style="float: left">
-                                    <img src="{{trackinfo['albumcover']}}" width="100" height="100" style="padding-right: 5%;"/>
-                                </div>
-                                <div class="has-text-left" style="padding-left: 5%;">
-                                <strong>{{trackinfo['name']}}</strong> <br>
-                                by {{trackinfo['artists']}} <br>
-                                on {{trackinfo['album']}} <br>
-                                </div>
-                                <div style="float: right">
-                                    <a href="{{trackinfo['url']}}">
-                                        <i class="fa fa-2x fa-spotify" style="color:green"></i>
-                                    
-                                    </a>
-                                </div>
+                        {% if trackinfo['listening'] is true %}
+                            <div class="columns">
+                            <div class="column is-three-fifths is-offset-one-fifth has-background-light">
+                                <div class="card-content">
+                                    <div style="float: left">
+                                        <img src="{{trackinfo['albumcover']}}" width="100" height="100" style="padding-right: 5%;"/>
+                                    </div>
+                                    <div class="has-text-left" style="padding-left: 5%;">
+                                    <strong>{{trackinfo['name']}}</strong> <br>
+                                    by {{trackinfo['artists']}} <br>
+                                    on {{trackinfo['album']}} <br>
+                                    </div>
+                                    <div style="float: right">
+                                        <a href="{{trackinfo['url']}}">
+                                            <i class="fa fa-2x fa-spotify" style="color:green"></i>
+                                        
+                                        </a>
+                                    </div>
 
+                                </div>
                             </div>
-                        </div>
+                        {% endif %}
+                        
                         </div>
                     </div>
                 </div>
