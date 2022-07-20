@@ -13,7 +13,6 @@ class AppTestCase(unittest.TestCase):
         assert response.status_code == 200
         html = response.get_data(as_text=True)
         assert "<title>Logan Hoogendijk's Portfolio</title>" in html
-        assert '<p class="title is-4"> Logan Hoogendijk </p>' in html
 
     def test_timeline_api(self):
         # empty get
