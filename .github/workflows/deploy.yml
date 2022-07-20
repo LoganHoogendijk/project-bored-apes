@@ -5,9 +5,9 @@ on:
     branches:
       - main
   workflow_run:
-    workflows: ["Run Tsts"]
+    workflows: ["Run Tests"]
     types: [completed] #requested
-   workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   deploy:
