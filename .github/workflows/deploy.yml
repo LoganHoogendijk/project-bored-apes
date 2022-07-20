@@ -4,10 +4,10 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
   workflow_run:
-    workflows: ["Run Tests"]
-    types: [completed]
+    workflows: ["Run Tsts"]
+    types: [completed] #requested
+   workflow_dispatch:
 
 jobs:
   deploy:
