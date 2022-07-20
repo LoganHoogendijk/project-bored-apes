@@ -16,12 +16,13 @@ if os.getenv("TESTING") == "true":
     mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', uri=True)
 else:
     mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"),
-            user=os.getenv("MYSQL_USER"),
-            password=os.getenv("MYSQL_PASSWORD"),
-            host=os.getenv("MYSQL_HOST"),
-            port=3306
-    )
+                         user=os.getenv("MYSQL_USER"),
+                         password=os.getenv("MYSQL_PASSWORD"),
+                         host=os.getenv("MYSQL_HOST"),
+                         port=3306
+                         )
 print(mydb)
+
 
 class TimelinePost(Model):
     name = CharField()
@@ -32,10 +33,13 @@ class TimelinePost(Model):
     class Meta:
         database = mydb
 
+
 mydb.connect()
 mydb.create_tables([TimelinePost])
 
-#POST method
+# POST method
+
+
 @app.route('/api/timeline_post', methods=['POST'])
 def post_time_line_post():
     try:
@@ -56,62 +60,76 @@ def post_time_line_post():
             return 'Invalid content', 400
     except:
         return 'Invalid content', 400
-        
-    timeline_post = TimelinePost.create(name=name, email=email, content=content)
+
+    timeline_post = TimelinePost.create(
+        name=name, email=email, content=content)
 
     return model_to_dict(timeline_post)
 
-#GET method
+# GET method
+
+
 @app.route('/api/timeline_post', methods=['GET'])
 def get_time_line_post():
     return {
         'timeline_posts': [
             model_to_dict(p)
             for p in
-                TimelinePost.select().order_by(TimelinePost.created_at.desc())
+            TimelinePost.select().order_by(TimelinePost.created_at.desc())
         ]
     }
-#GET by id method
+# GET by id method
+
+
 @app.route('/api/timeline_post/<id>', methods=['GET'])
 def get_time_line_post_id(id):
     p = TimelinePost.get(TimelinePost.id == id)
     return model_to_dict(p)
 
-#DELETE post by id method
+# DELETE post by id method
+
+
 @app.route('/api/timeline_post/<id>', methods=['DELETE'])
 def delete_time_line_post_id(id):
     p = TimelinePost.get(TimelinePost.id == id)
     p.delete_instance()
     return "Deleted the post with ID=" + id + "\n"
 
+
 @app.route('/timeline')
 def timeline():
-        return render_template('timeline.html', title="Timeline")
+    return render_template('timeline.html', title="Timeline")
+
 
 data = 0
 filename = os.path.join(app.static_folder, 'data.json')
 with open(filename) as f:
     data = json.load(f)
 
+
 @app.route("/")
 def index():
     current_track_info = get_track()
-    return render_template('components/about.html', title="logan", url=os.getenv("URL"), data=data, trackinfo = current_track_info)
+    return render_template('components/about.html', title="logan", url=os.getenv("URL"), data=data, trackinfo=current_track_info)
+
 
 @app.route("/projects")
 def hobbies():
     return render_template('components/projects.html', title="logan", url=os.getenv("URL"), data=data)
+
 
 @app.errorhandler(404)
 def page_not_found(e):
     # Set the 404 status explicitly
     return render_template('pages/404.html'), 404
 
+
 # spotify widget --------------------------------------------------------------------
 CURRENT_TRACK_URL = 'https://api.lanyard.rest/v1/users/140901727413993472'
 
+
 def get_track():
-    response =requests.get(
+    response = requests.get(
         CURRENT_TRACK_URL
     )
     json_resp = response.json()
@@ -138,4 +156,4 @@ def get_track():
         }
 
         return current_track_info
-#--------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------
