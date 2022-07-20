@@ -5,11 +5,15 @@ on:
     branches:
       - main
   workflow_dispatch:
+  workflow_run:
+    workflows: ["Run Tests"]
+    types: [completed]
 
 jobs:
   deploy:
     name: "Deploy to VPS"
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Configure SSH
         run: |
@@ -30,7 +34,7 @@ jobs:
 
       - name: Deploy site
         id: deploy
-        run: ssh my-vps '~/redeploy-site.sh'
+        run: ssh my-vps '~/redeploy-site.sh' docker-compose ps
 
       - name: Discord success message
         if: steps.deploy.outcome == 'success'
