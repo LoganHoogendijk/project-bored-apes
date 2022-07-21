@@ -33,7 +33,7 @@ jobs:
   deploy:
     name: "Deploy to VPS"
     runs-on: ubuntu-latest
-    if: ${{ steps.testrun.outcome == 'success' }}
+    if: ${{ needs.test.result == 'success' }}
     steps:
       - name: Configure SSH
         run: |
