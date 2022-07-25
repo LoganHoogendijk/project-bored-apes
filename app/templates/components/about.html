@@ -1,31 +1,68 @@
-<!-- About Me Start -->
-<section class="hero has-jungle-bg is-fullheight p-6">
-    <div class="hero-body p-6">
-        <div class="container has-text-centered">
-            <div class="column is-8 is-offset-2">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="profile">
-                            <div id="profile-picture" class="profile-picture">
-                                <img src="{{ data[title]['image']}}">
-                            </div>
-                        </div>
-                        <p class="title is-4"> {{ data[title]['name'] }} </p>
+<!-- About Start -->
+{% extends "layouts/base.html" %}
+
+{% block content %}
+
+<section id="about" class="hero is-fullheight has-text-white has-background-info-dark">
+    <div class="column is-8 is-offset-2">
+                <div class="profile">
+                    <div id="profile-picture" class="profile-picture">
+                        <img src="{{ data[title]['image']}}">
                     </div>
                 </div>
-                <div class="card" class="has-background-white about-column">
-                    <div class="box about">
-                        <p class="title is-5">About Me</p>
-                        <p class="subtitle">{{ data[title]['about'] }}</p>
-                        <div class="buttons is-centered">
-                            {% for anchor in anchors %}
-                            <a href="{{ '#' ~ anchor|lower}}" class="button">{{anchor|lower}}</a>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
+        <div class="hero-head">
+            <div class="title is-size-2 has-text-white has-text-centered">
+                {{ data[title]['name'] }}
             </div>
         </div>
-    </div>
+            <div class="block">
+                <p class="is-size-4 has-text-weight-bold has-text-white">Education</p>
+                {{data[title]['education']}}
+            </div>
+            <div class="block">
+                <p class="is-size-4 has-text-weight-bold has-text-white"> About Me</p>
+                {{data[title]['about']}}
+            </div>
+            <div class="block">
+                <p class="is-size-4 has-text-weight-bold has-text-white"> Experience</p>
+            </div>
+            <div id="grid" class="columns">
+                {% for experience in data[title]['experience'] %}
+                <div class="column" style="display: flex">
+                    <div class="notification is-info">
+                        <div style="float: left">
+                            <img src="{{experience['image']}}" width="120" height="120" style="padding-right: 5%;"/>
+                        </div>
+                        <p class="title is-4 has-text-left">{{ experience['title'] }}</p>
+                        <p class="title is-5 has-text-left">QMIND </p>
+                        <p class="title is-6 has-text-left">{{experience['range']}}</p>
+                            <ul>
+                                <li class="is-size-6 pl-3" style="white-space: pre-wrap">{{ experience['info'] }}</li>
+                            </ul>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+    </div> 
+    {% if trackinfo['listening'] is true %}
+        <div class="column is-one-third is-offset-2 has-background-info-dark">
+                <div style="float: left">
+                    <img src="{{trackinfo['albumcover']}}" width="100" height="100" style="padding-right: 5%;"/>
+                </div>
+                <div class="has-text-left has-text-white" style="padding-left: 5%;">
+                <strong class="has-text-white">{{trackinfo['name']}}</strong> <br>
+                by {{trackinfo['artists']}} <br>
+                on {{trackinfo['album']}} <br>
+                </div>
+                <div style="float: right">
+                    <a href="{{trackinfo['url']}}">
+                        <i class="fa fa-2x fa-spotify" style="color:white"></i>
+                    
+                    </a>
+                </div>
+        </div>
+
+    {% endif %}
 </section>
-<!-- About Me End -->
+<!-- ABout End -->
+{% endblock %}

@@ -1,6 +1,5 @@
 import unittest
 import os
-from urllib import response
 os.environ['TESTING'] = 'true'
 
 from app import app
@@ -14,12 +13,6 @@ class AppTestCase(unittest.TestCase):
         assert response.status_code == 200
         html = response.get_data(as_text=True)
         assert "<title>Logan Hoogendijk's Portfolio</title>" in html
-        assert '<p class="title is-4"> Logan Hoogendijk </p>' in html
-        assert '<h1 class="title is-1 is-uppercase has-text-white ">Experience</h1>' in html
-        assert '<h1 class="title is-1 is-uppercase has-text-white">Education</h1>' in html
-        assert '<h1 class="title is-1 is-uppercase has-text-white">Projects</h1>' in html
-        assert '<h1 class="title is-1 has-text-white is-uppercase">Trivia Board</h1>' in html
-        assert '<h1 class="title is-1 is-uppercase has-text-white">Hobbies</h1>' in html
 
     def test_timeline_api(self):
         # empty get
@@ -92,7 +85,7 @@ class AppTestCase(unittest.TestCase):
         assert response.status_code == 400
         html = response.get_data(as_text=True)
         assert "Invalid email" in html
-
+        
     def test_timeline_page(self):
         response = self.client.get("/timeline")
         assert response.status_code == 200
@@ -100,3 +93,4 @@ class AppTestCase(unittest.TestCase):
         assert "<h1>Timeline Posts</h1>" in html
         assert '<form id="form">' in html
         assert '<table id="timelineposts">' in html
+

@@ -1,44 +1,35 @@
 <!--Navbar start-->
-        <nav id="top" class="navbar is-transparent" id="grnav">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="{{ url_for('index') }}">
-                <img src="{{ url_for('static', filename='img/logo.png') }}" width="112" height="28">
-                </a>
-                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                </a>
+<nav class="navbar is-transparent has-background-info pt-6" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand is-size-4 has-text-white">
+        <a class="navbar-item has-text-white"></a>
+    </div>
+    <div class="navbar-end pr-6">
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start is-size-5">
+              <a class="navbar-item has-text-white" href="/">
+                About
+              </a>
+        
+              <a class="navbar-item has-text-white" href="/projects">
+                Projects
+              </a>
+        
+              </div>
             </div>
-            <div class="navbar-menu">
-                <div class="navbar-start" id="topnavbar">
-                    {% for person in data %}
-                    {% if title == person %}
-                    <a class="navbar-item has-text-weight-bold has-text-warning-dark" href={{ person }}>
-                        <figure class="image is-hidden-touch">
-                            <img class="is-rounded" src="{{ data[person]['image']}}">
-                        </figure>
-                        &nbsp; &nbsp; {{ data[person]["name"] }}
-                    </a>
-                    {% else %}
-                    <a class="navbar-item has-text-info-dark" href={{ person }}>
-                        <figure class="image is-hidden-touch">
-                            <img class="is-rounded" src="{{ data[person]['image']}}">
-                        </figure>
-                        &nbsp; &nbsp;{{ data[person]["name"] }}
-                    </a>
-                    {% endif %}
-                    {% endfor %}
+        
+            
+              <div class="navbar-item">
+                <div class="buttons">
+                    <a class="button is-info" href={{data[title]['social'][1]['val']}}>
+                        <i class="fa fa-2x fa-github"></i>
+                  </a>
+                  <a class="button is-info" href={{data[title]['social'][0]['val']}}>
+                    <i class="fa fa-2x fa-linkedin-square"></i>
+                        
+                  </a>
                 </div>
-                <div class="navbar-end">
-                    <a class="navbar-item">
-                        <p class="is-hidden-touch" id="btnarrow" onclick="show_hide()" padding="50px">
-                            <span class='icon'>
-                            <i class='fa-solid fa-angle-up'></i>
-                            </span>
-                        </p>
-                    </a>
-                </div>
+              </div>
             </div>
-        </nav>
+          </div>
+</nav>
 <!--Navbar end-->

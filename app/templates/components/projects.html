@@ -1,57 +1,32 @@
 <!-- Projects Start -->
-<section id="projects" class="hero has-nft-bg is-fullheight">
-    <div class="hero-body">
-        <div class="container has-text-centered p-6">
-            <h1 class="title is-1 is-uppercase has-text-white">Projects</h1>
+{% extends "layouts/base.html" %}
+
+{% block content %}
+<section class="hero is-fullheight has-background-info-dark p-6">
+    <div class="column is-8 is-offset-2">
+        <p class="title has-text-white has-text-centered is-size-2">Projects</p>
+        <div id="grid" class="columns">
             {% for project in data[title]['projects'] %}
-            <div class="block">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="columns is-vcentered is-centered">
-                            <div class="column is-three-fifths">
-                                <h1 class="title is-1">{{project.title}}</h1>
-                                <div class="block is-centered">
-                                    <h1 class="title is-6">{{project.description}}</h1>
-                                    <div class="tags  are-medium is-centered">
-                                        {% for stack in project.stacks %}
-                                        <span class="tag is-rounded is-link is-light">{{stack}}</span>
-                                        {% endfor %}
-                                    </div>
-                                    <div class="buttons is-centered">
-                                        {% if project.link %}
-                                        <a href={{project.link}} target="_blank" rel="noreferrer noopener">
-                                        <button class="button is-large is-danger is-rounded">
-                                        <span class="icon is-medium">
-                                        <i class="fas fa-link"></i>
-                                        </span> 
-                                        <span>Link</span>
-                                        </button>
-                                        </a>
-                                        {% endif %}
-                                        {% if project.repo %}
-                                        <a href={{project.repo}} target="_blank" rel="noreferrer noopener">
-                                        <button class="button is-large is-danger is-rounded">
-                                        <span class="icon is-medium">
-                                        <i class="fab fa-github-alt"></i>
-                                        </span> 
-                                        <span>Repository</span>
-                                        </button>
-                                        </a>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="column">
-                                <figure class="image is-2by1">
-                                    <img src="{{ project['image']}}"/>
-                                </figure>
-                            </div>
-                        </div>
+            <div class="column" style="display: block">
+                <div class="notification is-link has-text-centered">
+                    <p class="title is-4">{{project['title']}}</p>
+                    <p class="subtitle is-6">{{project['description']}}</p>
+                    <div class="tags  are-medium is-centered">
+                        {% for stack in project['stacks'] %}
+                        <span class="tag is-rounded is-link is-light is-size-7">{{stack}}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="has-text-right">
+                        <a href="{{project['repo']}}">
+                            <i class="fa fa-link"></i>
+                        </a>
                     </div>
                 </div>
             </div>
             {% endfor %}
-        </div>
+    </div>
     </div>
 </section>
+
+{% endblock %}
 <!-- Projects End -->

@@ -7,7 +7,7 @@
       <meta property="og:description" content="{{ data[title]['name']|title}}'s Portfolio">
       <meta property="og:url" content="{{ url }}">
       <meta propery="og:author" content="Logan Hoogendijk">
-      <title>{{data[title]['name']|title}}'s Portfolio</title>
+      <title>{{ data[title]['name']|title}}'s Portfolio</title>
       <link rel="icon" type="image/x-icon" href="{{ data[title]['image']}}">
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
       <script src="https://kit.fontawesome.com/6f97194b39.js" crossorigin="anonymous"></script>
@@ -16,53 +16,22 @@
    <body>
       {% include 'components/navigation.html' %}
       <div id="content">{% block content %}{% endblock %}</div>
+      {% block footer %}
+      <footer class="footer has-background-info">
+        <div class="content has-text-white has-text-centered">
+          <div class="block">
+            <p>
+                Copyright <i class="fa fa-copyright"></i> Logan Hoogendijk
+            </p>
+          </div>
+        </div>
+      </footer>
+      {% endblock %}
+
       <script src="https://kit.fontawesome.com/1dcdba3ff6.js" crossorigin="anonymous"></script>
       <script src="https://code.jquery.com/jquery-3.5.1.js"
          integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
          crossorigin="anonymous"></script>
       <script src=" {{ url_for('static', filename='js/arrow.js') }}"></script>
-      <script
-         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt4EkwGj2-VGm0Kw3VF-0-5EpKveUAXAA&callback=initMap&libraries=&v=weekly"
-         async></script>
-      <script type="text/javascript" src=" {{ url_for('static', filename='js/app.js') }}"></script>
-      <script>
-         // Initialize and add the map
-         function initMap() {
-         
-           const newYork = {
-             lat: 40.730610,
-             lng: -73.935242
-           };
-         
-           // Create the map, centered at gfg_office
-           const map = new google.maps.Map(document.getElementById("map"), {
-             zoom: 3,
-             center: newYork,
-           });
-         
-           var places = {{data|tojson}};
-         
-           var infowindow = new google.maps.InfoWindow();
-         
-           const locations = places["{{title}}"].locations;
-         
-           var marker, i;
-         
-           for (i = 0; i < locations.length; i++){
-           
-           marker = new google.maps.Marker({
-             position: new google.maps.LatLng(locations[i].lat, locations[i].lng),
-             map: map
-           });
-         
-           google.maps.event.addListener(marker, 'click', (function(marker, i) {
-             return function() {
-               infowindow.setContent(locations[i].name);
-               infowindow.open(map, marker);
-             }
-           })(marker, i));
-           }
-         }
-      </script>
    </body>
 </html>
