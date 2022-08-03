@@ -85,3 +85,12 @@ class AppTestCase(unittest.TestCase):
         assert response.status_code == 400
         html = response.get_data(as_text=True)
         assert "Invalid email" in html
+        
+    def test_timeline_page(self):
+        response = self.client.get("/timeline")
+        assert response.status_code == 200
+        html = response.get_data(as_text=True)
+        assert "<h1>Timeline Posts</h1>" in html
+        assert '<form id="form">' in html
+        assert '<table id="timelineposts">' in html
+
